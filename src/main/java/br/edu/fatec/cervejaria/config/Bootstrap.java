@@ -36,7 +36,7 @@ public class Bootstrap extends GuiceServletContextListener {
                 final Map<String, String> params = new HashMap<>();
                 params.put(PackagesResourceConfig.PROPERTY_PACKAGES, "br.edu.fatec");
 
-                serve("/*").with(GuiceContainer.class, params);
+                serve("/api/*").with(GuiceContainer.class, params);
             }
         });
     }
