@@ -2,4 +2,5 @@
 Projeto exemplo: REST (jersey 1.19 + guice 3.0)
 
 # Rodando
-mvn tomcat7:run
+// (isto vai executar o goal default com hsqlbd e tomcat7)
+$ mvn 
