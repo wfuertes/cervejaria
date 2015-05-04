@@ -1,6 +1,3 @@
-/*
- * Copyright 2015, Charter Communications, All rights reserved.
- */
 package br.edu.fatec.cervejaria.config;
 
 import br.edu.fatec.cervejaria.service.BeerService;
