@@ -6,7 +6,6 @@ package br.edu.fatec.cervejaria.service;
 import br.edu.fatec.cervejaria.model.Beer;
 
 import com.google.inject.Inject;
-import com.google.inject.TypeLiteral;
 import com.google.inject.persist.Transactional;
 
 import java.math.BigDecimal;
@@ -20,7 +19,7 @@ import javax.persistence.EntityManager;
  *
  * @author wbatista
  */
-public class BeerServiceStub extends TypeLiteral<BeerService> implements BeerService {
+public class BeerServiceStub implements BeerService {
 
     private final EntityManager em;
 
@@ -35,8 +34,11 @@ public class BeerServiceStub extends TypeLiteral<BeerService> implements BeerSer
     public void init() {
 
         if (findAll().isEmpty()) {
-            em.persist(new Beer("Bhrama 600ML", new BigDecimal("3.49")));
-            em.persist(new Beer("Skol Lata 350ML", new BigDecimal("2.49")));
+            em.persist(new Beer("Bhrama 600ML", new BigDecimal("4.50")));
+            em.persist(new Beer("Skol Lata 350ML", new BigDecimal("3.00")));
+            em.persist(new Beer("Kaiser 600ML", new BigDecimal("5.20")));
+            em.persist(new Beer("Paulaner 500ML", new BigDecimal("12.00")));
+            em.persist(new Beer("Cristal Lata 350ML", new BigDecimal("2.50")));
         }
     }
 

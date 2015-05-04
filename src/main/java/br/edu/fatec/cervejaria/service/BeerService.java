@@ -3,16 +3,16 @@
  */
 package br.edu.fatec.cervejaria.service;
 
-import java.util.List;
-
 import br.edu.fatec.cervejaria.model.Beer;
+
+import java.util.List;
 
 /**
  *
  *
  * @author wbatista
  */
-public interface BeerService {
+public interface BeerService    {
 
     Long save(Beer beer);
 
