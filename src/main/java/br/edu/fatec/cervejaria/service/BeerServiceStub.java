@@ -5,47 +5,60 @@ package br.edu.fatec.cervejaria.service;
 
 import br.edu.fatec.cervejaria.model.Beer;
 
+import com.google.inject.Inject;
+import com.google.inject.TypeLiteral;
+import com.google.inject.persist.Transactional;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 
 /**
  *
  *
  * @author wbatista
  */
-public class BeerServiceStub implements BeerService {
+public class BeerServiceStub extends TypeLiteral<BeerService> implements BeerService {
 
-    private static final Map<Long, Beer> beers = new HashMap<>();
-    static {
-        beers.put(1L, new Beer(1L, "Bhrama 600ML", new BigDecimal("3.49")));
-        beers.put(2L, new Beer(2L, "Skol Lata 350LM", new BigDecimal("2.49")));
+    private final EntityManager em;
+
+    @Inject
+    public BeerServiceStub(final EntityManager em) {
+
+        this.em = em;
     }
 
+    @PostConstruct
+    @Transactional
+    public void init() {
+
+        if (findAll().isEmpty()) {
+            em.persist(new Beer("Bhrama 600ML", new BigDecimal("3.49")));
+            em.persist(new Beer("Skol Lata 350ML", new BigDecimal("2.49")));
+        }
+    }
+
+    @Transactional
     public Long save(Beer beer) {
 
-        Long id = beer.getId() == null ? System.currentTimeMillis() + 1 : beer.getId();
-        beer.setId(id);
-        beers.put(id, beer);
-
-        return id;
+        return em.merge(beer).getId();
     }
 
+    @Transactional
     public void delete(Long id) {
 
-        beers.remove(beers.get(id));
+        em.remove(new Beer(id));
     }
 
     public Beer find(Long id) {
 
-        return beers.get(id);
+        return em.find(Beer.class, id);
     }
 
     public List<Beer> findAll() {
 
-        return new ArrayList<>(beers.values());
+        return em.createQuery("from Beer order by name", Beer.class).getResultList();
     }
-
 }
