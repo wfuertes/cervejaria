@@ -3,7 +3,9 @@ Projeto exemplo: REST (jersey 1.19 + guice 3.0)
 
 # Rodando
 (com hsqlbd e tomcat7) 
+```
 $ mvn hsqldb:start tomcat7:run 
+```
 
 # Curls de exemplo 
     
