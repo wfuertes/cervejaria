@@ -1,4 +1,4 @@
-# cervejaria
+# cervejaria [![Build Status](https://travis-ci.com/wfuertes/cervejaria.svg?branch=master)](https://travis-ci.com/wfuertes/cervejaria)
 Projeto exemplo: REST (jersey 1.19 + guice 3.0) 
 
 # Rodando
