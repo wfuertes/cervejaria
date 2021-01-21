@@ -55,17 +55,8 @@ public class CervejariaModule extends AbstractModule {
     private TypeListener beerServiceListener() {
 
         return new TypeListener() {
-
             public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-
-                encounter.register(new InjectionListener<I>() {
-
-                    @Override
-                    public void afterInjection(Object obj) {
-
-                        ((BeerServiceStub) obj).init();
-                    }
-                });
+                encounter.register((InjectionListener<I>) obj -> ((BeerServiceStub) obj).init());
             }
         };
     }
@@ -81,21 +72,16 @@ public class CervejariaModule extends AbstractModule {
 
             public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
 
-                encounter.register(new InjectionListener<I>() {
-
-                    @Override
-                    public void afterInjection(Object obj) {
-
-                        Class<?> superclass = obj.getClass().getSuperclass();
-                        for (Method method : superclass.getMethods()) {
-                            try {
-                                PostConstruct[] annotations = method.getAnnotationsByType(PostConstruct.class);
-                                if (annotations.length > 0) {
-                                    method.invoke(obj);
-                                }
-                            } catch (Exception e) {
-                                LOG.error("Erro ao chamar o PostConstructor para: " + method.getName());
+                encounter.register((InjectionListener<I>) obj -> {
+                    Class<?> superclass = obj.getClass().getSuperclass();
+                    for (Method method : superclass.getMethods()) {
+                        try {
+                            PostConstruct[] annotations = method.getAnnotationsByType(PostConstruct.class);
+                            if (annotations.length > 0) {
+                                method.invoke(obj);
                             }
+                        } catch (Exception e) {
+                            LOG.error("Erro ao chamar o PostConstructor para: " + method.getName());
                         }
                     }
                 });
