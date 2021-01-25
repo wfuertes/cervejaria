@@ -1,13 +1,13 @@
-# cervejaria [![Build Status](https://travis-ci.com/wfuertes/cervejaria.svg?branch=master)](https://travis-ci.com/wfuertes/cervejaria)
-Projeto exemplo: REST (jersey 1.19 + guice 3.0) 
+# cervejaria [![wfuertes](https://circleci.com/gh/wfuertes/cervejaria.svg?style=shield)](https://github.com/wfuertes/cervejaria)
+Example REST project using (jersey 1.19 + guice 3.0) 
 
-# Rodando
+# Running
 (com hsqlbd e tomcat7) 
 ```
 $ mvn hsqldb:start tomcat7:run 
 ```
 
-# Curls de exemplo 
+# Curls
     
 ## GET 
 ```
